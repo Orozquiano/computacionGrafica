@@ -6,9 +6,6 @@ x,y=sp.symbols('x y')
 # str_ecuacion = input("Ingrese la ecuacion: \n")
 # funcion= sp.sympify(str_ecuacion)
 
-
-
-
 def f(x): 
     b= funcion.free_symbols
     var=b.pop()
