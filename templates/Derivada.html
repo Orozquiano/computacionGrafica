@@ -1,6 +1,6 @@
 {%extends "layout.html"%}
 {%block content%}
-<h1>Calculo de Primer y Segunda dericada (Evaluadas)</h1>
+<h1>Calculo de Primer y Segunda derivada (Evaluadas)</h1>
 <form action="/calcularDerivada" method="POST">
     <input type="text" name="Ecuacion" placeholder="Ecuacion">
     <input type="text" name="ValorX" placeholder="Valor de X">
@@ -14,6 +14,8 @@
         </button>
     </div>
 </form>
-<h2>Derivada 1: {{D1}}</h>
-<h2>Derivada 2: {{D2}}</h>
+<h2>Derivada 1: {{d1}}</h>
+<h2>Derivada 2: {{d2}}</h>
+<h2>Derivada 1 evaluada: {{D1}}</h>
+<h2>Derivada 2 evaluada: {{D2}}</h>
 {%endblock%}

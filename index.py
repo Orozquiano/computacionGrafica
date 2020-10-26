@@ -106,6 +106,8 @@ def CDerivada():
         str_ecuacion = request.form['Ecuacion']
         funcion= sp.sympify(str_ecuacion)
         X=float(request.form['ValorX'])
+        Deriavada1 = sp.diff(funcion,x,1)
+        Deriavada2 = sp.diff(funcion,x,2)
 
         def f(x):
             print("Entre a ecuacion")
@@ -130,6 +132,7 @@ def CDerivada():
             return valor1,valor2
         def Menu():
 
+            
             opcion=X
 
             return ecuacion(opcion)
@@ -138,7 +141,7 @@ def CDerivada():
         Menu()
 
        
-        return render_template('Derivada.html',D1=Menu()[0],D2=Menu()[1])
+        return render_template('Derivada.html',D1=Menu()[0],D2=Menu()[1],d1=Deriavada1,d2=Deriavada2)
 
 @app.route('/RPolinomio')
 def RPolinomio():    

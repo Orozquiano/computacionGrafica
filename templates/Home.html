@@ -75,7 +75,7 @@
   function draw() {
     try {
       // compile the expression once
-      const expression = document.getElementById('eq').value
+      const expression = document.getElementById('eq').value.replaceAll("**","^").replaceAll("ln", "log")
       const expr = math.compile(expression)
 
       // evaluate the expression repeatedly for different values of x
