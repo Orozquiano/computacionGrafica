@@ -60,10 +60,20 @@
     <script src="https://unpkg.com/mathjs@7.5.1/dist/math.min.js"></script>
 
     <script src="https://cdn.plot.ly/plotly-1.35.2.min.js"></script>
-
+    <style>
+      form{
+        display: flex;
+        flex-direction: column;
+      }
+      form label{
+        display:flex;
+        flex-direction: column;
+      }
+    </style>
     <form id="form">
-      <label for="eq">Digite la ecuacion:</label>
-      <input type="text" id="eq" value="4 * sin(x) + 5 * cos(x/2)" />
+      <label>Digite la ecuacion:
+        <input type="text" id="eq" value="4 * sin(x) + 5 * cos(x/2)" />
+      </label>
       <input type="submit" value="Draw" />
     </form>
 
