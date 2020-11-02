@@ -1,30 +1,7 @@
 {%extends "layout.html"%}
 {%block content%}
-<style>
-    .contenido{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .contenido form{
-        width: 50%;
-        display:flex;
-        flex-direction: column;
-        align-items: center;
-    }
-    .contenido form label{
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-    }
-    .contenido>h3{
-        margin-top:10px;
-    }
-    .contenido>textarea{
-        width: 50%;
-        font-size: 20px;
-    }
-</style>
+
+<link rel="stylesheet" href="{{url_for('static', filename='css/IntegracionRectangulos.css')}}">
 <div class="contenido">
     <h1>Integracion Por Rectángulos</h1>
     <form action="/CIntegracionRectangulos" method="POST">
@@ -40,8 +17,8 @@
         <label>Ingrese el número de iteraciones
             <textarea type="text" name="Iteraciones">{{Iteraciones}}</textarea>
         </label>
-        <button type="submit">Hallar</button>
-        <div>
+        <div class="">
+            <button type="submit">Hallar</button>
             <button type="reset">
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
