@@ -1,15 +1,16 @@
 
 :root{
-    --color-Blue1:#153240;
-    --color-Blue2:#2E6E8D;
-    --color-Blue3:#47AAD9;
-    --color-claro1:#FFE6B3;
-    --color-claro2:#FFF3D9;
+    --color-M1:#66097D;
+    --color-M2:#32043D;
+    --color-M3:#9A0DBD;
+    --color-M4:#A40EC9;
+    --color-M5:#860CA3;
     --color-Oscuro1: #000;
     --color-claro0: #FFF;
 }
 
 * {
+    background-color: var(--color-M2);
     margin:0px;
     padding:0px;
     
@@ -26,10 +27,15 @@
     
 }
 
-ul, ol {
-    list-style:none;
+#header .nav{
+    display:flex;
+    width: 100vw;
 }
+/* ul, ol {
+    list-style:none;
+} */
 .nav{
+    display: flex;
     position: relative;
     left: 0px;
     grid-column: 1;
@@ -42,7 +48,7 @@ ul, ol {
 }
 
 .nav li a {
-    background-color:var(--color-Blue1);
+    background-color:var(--color-M1);
     color:#fff;
     text-decoration:none;
     padding:10px 12px;
@@ -91,6 +97,7 @@ body, html, input {
     /* margin: 20px 0; */
     grid-column: 1;
     grid-row: 2;
+    
 }
 #form{
     display: flex;  

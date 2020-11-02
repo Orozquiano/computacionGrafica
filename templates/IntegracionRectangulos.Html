@@ -1,6 +1,7 @@
 {%extends "layout.html"%}
 {%block content%}
-<style>
+<link rel="stylesheet" href="{{url_for('static', filename='css/IntegracionRectangulos.css')}}">
+<!-- <style>
     :root{
         --color-Blue1:#153240;
         --color-Blue2:#2E6E8D;
@@ -49,7 +50,7 @@
         background-color: var(--color-Blue1);
         color: var(--color-Blue3);
     }
-</style>
+</style> -->
 <div class="contenido">
     <h1>Integracion Por Rectángulos</h1>
     <form action="/CIntegracionRectangulos" method="POST">
