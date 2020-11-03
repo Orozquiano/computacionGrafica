@@ -20,7 +20,9 @@ import matplotlib as mat
 # Secante
 
 app=Flask(__name__)
-
+@app.route('/Grafica.html')
+def Grafica():
+    return render_template('Grafica.html')
 @app.route('/')
 def home():
     return render_template('Home.html')

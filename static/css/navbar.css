@@ -7,8 +7,8 @@
     --color-Oscuro1: #000;
     --color-claro0: #FFF;
 }
-.navbar{
-    background-color: var(--color-M3);
+/* .navbar{
+    background-color: var(--color-M2);
     margin:0;
 }
 .navbar .navbar-brand{
@@ -16,10 +16,10 @@
 }
 
 .navbar #navbarNav{
-    background-color: var(--color-M3);
+    background-color: var(--color-M2);
     
 }
 
 .navbar #navbarNav .nav-link{
-    background-color: var(--color-M3);
-}
+    background-color: var(--color-M2);
+} */
