@@ -95,17 +95,16 @@
       <div class="col-sm-4">
         <div class="card card-flip h-100">
           <div class="card-front text-white bg-dark">
-            <div class="card-body">
+            <div class="card-body"style="display: flex; justify-content: center; align-items: center; background-color:#E63946;">
               <i class="fa fa-search fa-5x float-right"></i>
-              <h3 class="card-title">Front</h3>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <h3 class="card-title"style="font-family:fantasy">Graficador</h3>
             </div>
           </div>
-          <div class="card-back bg-white">
+          <div class="card-back bg-dark text-white" >
             <div class="card-body">
-              <h3 class="card-title">Back</h3>
-              <p class="card-text">Suprise this one has more more more more content on the back!</p>
-              <a href="#" class="btn btn-outline-secondary">Action</a>
+              <h3 class="card-title">Graficador</h3>
+              <p class="card-text">Está sección te permite visualizar las graficas de cada función</p>
+              <a href="{{url_for('Grafica')}}" class="btn btn-outline-secondary">LINK</a>
             </div>
           </div>
         </div>
@@ -113,17 +112,17 @@
       <div class="col-sm-4">
         <div class="card card-flip h-100">
           <div class="card-front text-white bg-warning">
-            <div class="card-body">
+            <div class="card-body"style="display: flex; justify-content: center; align-items: center; background-color:#A8DADC;">
               <i class="fa fa-search-plus fa-5x float-right"></i>
-              <h3 class="card-title">Front</h3>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <h3 class="card-title"style="font-family:fantasy">Raices de la ecuación</h3>
             </div>
           </div>
           <div class="card-back bg-dark text-white">
-            <div class="card-body">
-              <h3 class="card-title">Back #2</h3>
-              <p class="card-text">Suprise this one has content on the back!</p>
-              <a href="#" class="btn btn-outline-secondary">Action</a>
+            <div class="card-body"style="display: flex; flex-direction:column; flex-wrap: wrap; aling-content:center; aling-items:center; justify-content:center;" >
+              <a href="{{url_for('Biseccion')}}" class="btn btn-outline-secondary" style="margin-bottom:20px">Biseccion</a>
+              <a href="{{url_for('RPolinomio')}}" class="btn btn-outline-secondary " style="margin-bottom:20px">Raiz de polinomios</a>
+              <a href="{{url_for('Raphson')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Newton Raphson</a>
+              <a href="{{url_for('ReglaFalsa')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Regla falsa</a>
             </div>
           </div>
         </div>
@@ -131,18 +130,16 @@
       <div class="col-sm-4">
         <div class="card card-flip h-100">
           <div class="card-front text-white bg-primary">
-            <div class="card-body">
+            <div class="card-body" style="display: flex; justify-content: center; align-items: center; background-color:#457B9D;">
               <i class="fa fa-arrow-circle-right fa-5x float-right"></i>
-              <h3 class="card-title">Front</h3>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content. This one is a
-                little because it has more text!</p>
+              <h3 class="card-title"style="font-family:fantasy">Derivada</h3>
             </div>
           </div>
-          <div class="card-back bg-white">
-            <div class="card-body text-primary">
-              <h3 class="card-title">Wow! #3</h3>
-              <p class="card-text">Suprise this one has content on the back!</p>
-              <a href="#" class="btn btn-outline-primary">Action</a>
+          <div class="card-back bg-dark text-white">
+            <div class="card-body">
+              <h3 class="card-title"style="font-family:fantasy">Derivada</h3>
+              <p class="card-text"style="font-family:fantasy">límite hacia el cual tiende la razón entre el incremento de la función y el correspondiente a la variable cuando el incremento tiende a cero</p>
+              <a href="{{url_for('Calculadora')}}" class="btn btn-outline-secondary">Calculadora</a>
             </div>
           </div>
         </div>
@@ -150,17 +147,18 @@
       <div class="col-sm-4 my-3">
         <div class="card card-flip h-100">
           <div class="card-front text-white bg-dark">
-            <div class="card-body">
+            <div class="card-body" style="display: flex; justify-content: center; align-items: center; background-color: #1D3557;">
               <i class="fa fa-search fa-5x float-right"></i>
-              <h3 class="card-title">Front</h3>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <h3 class="card-title"style="font-family:fantasy">Integración</h3>
             </div>
           </div>
-          <div class="card-back bg-white">
-            <div class="card-body">
-              <h3 class="card-title">Back</h3>
-              <p class="card-text">Suprise this one has more more more more content on the back!</p>
-              <a href="#" class="btn btn-outline-secondary">Action</a>
+          <div class="card-back bg-dark text-white">
+            <div class="card-body" style="display: flex; flex-direction:column; flex-wrap: wrap; aling-content: center; aling-items: center; justify-content:center;">
+              <a href="{{url_for('IntegracionRectangulos')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Integración por rectangulos</a>
+              <a href="{{url_for('IntegracionTrapecio')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Integración por trapecio</a>
+              <a href="{{url_for('IntegracionSimpson1_3')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Integración por rectangulos</a>
+              <a href="{{url_for('IntegracionSimpson3_8')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Integración por rectangulos</a>
+              <a href="{{url_for('MonteCarlo')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Integración por MonteCarlo</a>
             </div>
           </div>
         </div>
