@@ -1,125 +1,200 @@
 {%extends "layout.html"%}
 {%block content%}
 <link rel="stylesheet" href="{{url_for('static', filename='css/styleHome.css')}}">
-<div id="header">
-  <ul class="nav">
-    <li><a href="">Inicio</a></li>
-    <li><a href="">Raices de la ecuacion</a>
-      <ul>
-        <li><a href="{{url_for('Biseccion')}}">
-            <div type="button" class="btn btn-outline-primary">Biseccion</div>
-          </a></li>
-        <li><a href="{{url_for('RPolinomio')}}">
-            <div type="button" class="btn btn-outline-success">Raiz Polinomio</div>
-          </a></li>
-        <li><a href="{{url_for('Raphson')}}">
-            <div type="button" class="btn btn-outline-secondary">Raphson</div>
-          </a></li>
-        <li><a href="{{url_for('ReglaFalsa')}}">
-            <div type="button" class="btn btn-outline-secondary">Regla Falsa</div>
-          </a>
-        </li>
-      </ul>
-    </li>
-    <li><a href="">Derivada</a>
-      <ul>
-        <a href="{{url_for('Derivada')}}">
-          <div type="button" class="btn btn-outline-secondary">Derivada</div>
-        </a>
-      </ul>
-    </li>
-    <li><a href="">Conversor</a>
-      <ul>
-        <li><a href="{{url_for('Calculadora')}}">
-            <div type="button" class="btn btn-outline-success">Conversor de Bases</div>
-          </a></li>
-      </ul>
-    </li>
-    <li><a href="">Integracion</a>
-      <ul>
-        <li><a href="{{url_for('IntegracionRectangulos')}}">
-            <div type="button" class="btn btn-outline-secondary">Integracion por Rectangulos</div>
-          </a></li>
-        <li><a href="{{url_for('IntegracionTrapecio')}}">
-            <div type="button" class="btn btn-outline-secondary">Integracion por Trapecios</div>
-          </a></li>
-        <li><a href="{{url_for('IntegracionSimpson1_3')}}">
-            <div type="button" class="btn btn-outline-secondary">Integracion Simsop 1/3</div>
-          </a></li>
-        <li><a href="{{url_for('IntegracionSimpson3_8')}}">
-            <div type="button" class="btn btn-outline-secondary">Integracion Simsop 3/8</div>
-          </a></li>
-        <li><a href="{{url_for('MonteCarlo')}}">
-            <div type="button" class="btn btn-outline-secondary">Integracion de Montecarlo</div>
-          </a></li>
-      </ul>
-    </li>
-  </ul>
-  <div class="Grafica">
-    <meta charset="utf-8">
-    <script src="https://unpkg.com/mathjs@7.5.1/dist/math.min.js"></script>
-
-    <script src="https://cdn.plot.ly/plotly-1.35.2.min.js"></script>
-    <style>
-      form{
-        display: flex;
-        flex-direction: column;
-      }
-      form label{
-        display:flex;
-        flex-direction: column;
-      }
-    </style>
-    <form id="form">
-      <label>Digite la ecuacion:
-        <input type="text" id="eq" value="4 * sin(x) + 5 * cos(x/2)" />
-      </label>
-      <input type="submit" value="Draw" />
-    </form>
-
-    <div id="plot"></div>
+<section>
+  <div id="Quienes_Somos">
+    <img src="{{url_for('static', filename='Images/matematicas.jpg')}}" class="matematicas">
+    <img src="{{url_for('static', filename='Images/LogoPagina.png')}}" class="logo">
+    <div class="About">
+      <p>Esta calculadora fue desarrollada en lenguaje Python mediante el editor de código de Microsoft "Visual Studio
+        Code" por Ingenieros Multimedia</p>
+    </div>
+    <div class="grid">
+      <div class="Orozco">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="{{url_for('static', filename='Images/Pizza.gif')}}" alt="Avatar"
+                style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1 style="font-family: fantasy;">Juan Pablo Orozco</h1><br>
+              <h3 style="font-family: fantasy;">Ingeniero multimedia</h3>
+              <p>Me gusta la pizza</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="Carlos">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="{{url_for('static', filename='Images/Naruto.gif')}}" alt="Avatar"
+                style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1 style="font-family: fantasy;">Carlos Andrés Ortega</h1><br>
+              <h3 style="font-family: fantasy;">Ingeniero multimedia</h3>
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="Perez">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="{{url_for('static', filename='Images/Leon.gif')}}" alt="Avatar"
+                style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1 style="font-family: fantasy;">Juan Pablo Perez</h1><br>
+              <h3 style="font-family: fantasy;">Ingeniero multimedia</h3>
+              <p>Tambien le gusta la pizza</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="Lobo">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="{{url_for('static', filename='Images/Lobo.gif')}}" alt="Avatar"
+                style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1 style="font-family: fantasy;">Julian Pedroza</h1><br>
+              <h3 style="font-family: fantasy;">Ingeniero multimedia</h3>
+              <p>Diosito</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="Panesso">
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="{{url_for('static', filename='Images/Cargando.gif')}}" alt="Avatar"
+                style="width:300px;height:300px;">
+            </div>
+            <div class="flip-card-back">
+              <h1 style="font-family: fantasy;">Carlos Panesso</h1><br>
+              <h3 style="font-family: fantasy;">Ingeniero multimedia</h3>
+              <p>Feliz?</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
-<!-- Grafica -->
-<script>
-  function draw() {
-    try {
-      // compile the expression once
-      const expression = document.getElementById('eq').value.replaceAll("**","^").replaceAll("ln", "log")
-      const expr = math.compile(expression)
+</section>
+<section>
+  <div class="carlitos">
+    <p clas="Calculadoras">CALCULADORAS</p>
+    <div class="row">
+      <div class="col-sm-4">
+        <div class="card card-flip h-100">
+          <div class="card-front text-white bg-dark">
+            <div class="card-body"style="display: flex; justify-content: center; align-items: center; background-color:#E63946;">
+              <i class="fa fa-search fa-5x float-right"></i>
+              <h3 class="card-title"style="font-family:fantasy">Graficador</h3>
+            </div>
+          </div>
+          <div class="card-back bg-dark text-white" >
+            <div class="card-body">
+              <h3 class="card-title">Graficador</h3>
+              <p class="card-text">Está sección te permite visualizar las graficas de cada función</p>
+              <a href="{{url_for('Grafica')}}" class="btn btn-outline-secondary">LINK</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card card-flip h-100">
+          <div class="card-front text-white bg-warning">
+            <div class="card-body"style="display: flex; justify-content: center; align-items: center; background-color:#A8DADC;">
+              <i class="fa fa-search-plus fa-5x float-right"></i>
+              <h3 class="card-title"style="font-family:fantasy">Raices de la ecuación</h3>
+            </div>
+          </div>
+          <div class="card-back bg-dark text-white">
+            <div class="card-body"style="display: flex; flex-direction:column; flex-wrap: wrap; aling-content:center; aling-items:center; justify-content:center;" >
+              <a href="{{url_for('Biseccion')}}" class="btn btn-outline-secondary" style="margin-bottom:20px">Biseccion</a>
+              <a href="{{url_for('RPolinomio')}}" class="btn btn-outline-secondary " style="margin-bottom:20px">Raiz de polinomios</a>
+              <a href="{{url_for('Raphson')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Newton Raphson</a>
+              <a href="{{url_for('ReglaFalsa')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Regla falsa</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="card card-flip h-100">
+          <div class="card-front text-white bg-primary">
+            <div class="card-body" style="display: flex; justify-content: center; align-items: center; background-color:#457B9D;">
+              <i class="fa fa-arrow-circle-right fa-5x float-right"></i>
+              <h3 class="card-title"style="font-family:fantasy">Derivada</h3>
+            </div>
+          </div>
+          <div class="card-back bg-dark text-white">
+            <div class="card-body">
+              <h3 class="card-title"style="font-family:fantasy">Derivada</h3>
+              <p class="card-text"style="font-family:fantasy">límite hacia el cual tiende la razón entre el incremento de la función y el correspondiente a la variable cuando el incremento tiende a cero</p>
+              <a href="{{url_for('Calculadora')}}" class="btn btn-outline-secondary">Calculadora</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 my-3">
+        <div class="card card-flip h-100">
+          <div class="card-front text-white bg-dark">
+            <div class="card-body" style="display: flex; justify-content: center; align-items: center; background-color: #1D3557;">
+              <i class="fa fa-search fa-5x float-right"></i>
+              <h3 class="card-title"style="font-family:fantasy">Integración</h3>
+            </div>
+          </div>
+          <div class="card-back bg-dark text-white">
+            <div class="card-body" style="display: flex; flex-direction:column; flex-wrap: wrap; aling-content: center; aling-items: center; justify-content:center;">
+              <a href="{{url_for('IntegracionRectangulos')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Integración por rectangulos</a>
+              <a href="{{url_for('IntegracionTrapecio')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Integración por trapecio</a>
+              <a href="{{url_for('IntegracionSimpson1_3')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Integración por rectangulos</a>
+              <a href="{{url_for('IntegracionSimpson3_8')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Integración por rectangulos</a>
+              <a href="{{url_for('MonteCarlo')}}" class="btn btn-outline-secondary"style="margin-bottom:20px">Integración por MonteCarlo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 my-3">
+        <div class="card card-flip h-100">
+          <div class="card-front text-white bg-danger">
+            <div class="card-body" style="display: flex; justify-content: center; align-items: center; background-color: #000000;">
+              <i class="fa fa-search fa-5x float-right"></i>
+              <h3 class="card-title"style="font-family:fantasy">Coversor de bases</h3>
+            </div>
+          </div>
+          <div class="card-back bg-dark text-white">
+            <div class="card-body" style="display: flex; flex-direction:column; flex-wrap: wrap; aling-content: center; aling-items: center; justify-content:center;">
+              <a href="{{url_for('Calculadora')}}" class="btn btn-outline-secondary">CALCULADORA</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 my-3">
+        <div class="card card-flip h-100">
+          <div class="card-front text-white bg-success">
+            <div class="card-body" style="display: flex; justify-content: center; align-items: center; background-color: #0FF00F;">
+              <i class="fa fa-search fa-5x float-right"></i>
+              <h3 class="card-title" style="font-family:fantasy">MATRICES</h3>
+            </div>
+          </div>
+          <div class="card-back bg-dark text-white">
+            <div class="card-body" style="display: flex; flex-direction:column; flex-wrap: wrap; aling-content: center; aling-items: center; justify-content:center;">
+              <a href="#" class="btn btn-outline-secondary">Action</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      // evaluate the expression repeatedly for different values of x
-      const xValues = math.range(-10, 10, 0.5).toArray()
-      const yValues = xValues.map(function (x) {
-        return expr.evaluate({ x: x })
-      })
-
-      // render the plot using plotly
-      const trace1 = {
-        x: xValues,
-        y: yValues,
-        type: 'scatter'
-      }
-      const data = [trace1]
-      Plotly.newPlot('plot', data)
-    }
-    catch (err) {
-      console.error(err)
-      alert(err)
-    }
-  }
-
-  document.getElementById('form').onsubmit = function (event) {
-    event.preventDefault()
-    draw()
-  }
-
-  draw()
-</script>
-
-<!-- 
-<button type="button" class="btn btn-outline-warning">Warning</button>
-<button type="button" class="btn btn-outline-info">Info</button>
-<button type="button" class="btn btn-outline-light">Light</button>
-<button type="button" class="btn btn-outline-dark">Dark</button> -->
+</section>
 {%endblock%}

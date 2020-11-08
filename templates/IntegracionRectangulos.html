@@ -1,6 +1,7 @@
 {%extends "layout.html"%}
 {%block content%}
-<style>
+<link rel="stylesheet" href="{{url_for('static', filename='css/IntegracionRectangulos.css')}}">
+<!-- <style>
     :root{
         --color-Blue1:#153240;
         --color-Blue2:#2E6E8D;
@@ -29,6 +30,10 @@
     .contenido>h3{
         margin-top:10px;
     }
+    .contenido>textarea{
+        width: 50%;
+        font-size: 20px;
+    }
     .contenido form .botones{
         width: 100%;
         display: flex;
@@ -45,21 +50,21 @@
         background-color: var(--color-Blue1);
         color: var(--color-Blue3);
     }
-</style>
+</style> -->
 <div class="contenido">
-    <h1>Regla Falsa</h1>
-    <form action="/CReglaFalsa" method="POST">
+    <h1>Integracion Por Rectángulos</h1>
+    <form action="/CIntegracionRectangulos" method="POST">
         <label>Ingrese la Función
             <textarea type="text" name="Ecuacion">{{Ecuacion}}</textarea>
         </label>
-        <label>Ingrese el valor del límite inferior
-            <textarea type="text" name="Limite inferior">{{LI}}</textarea>
+        <label>Ingrese el intervalo A
+            <textarea type="text" name="IA">{{IA}}</textarea>
         </label>
-        <label>Ingrese el valor del límite superior
-            <textarea type="text" name="Limite superior">{{LS}}</textarea>
+        <label>Ingrese el intervalo B
+            <textarea type="text" name="IB">{{IB}}</textarea>
         </label>
-        <label>Ingrese el valor de tolerancia del error
-            <textarea type="text" name="Tolerancia">{{Error}}</textarea>
+        <label>Ingrese el número de iteraciones
+            <textarea type="text" name="Iteraciones">{{Iteraciones}}</textarea>
         </label>
         <div class="botones">
             <button type="submit">Hallar</button>
@@ -71,7 +76,8 @@
             </button>
         </div>
     </form>
-    <h3>Resultado</h3>
-    <textarea>{{Resultado}}</textarea>
+    <h3>Calculado por punto izquierdo: {{Izq}}</h3>
+    <h3>Calculado por punto derecho: {{Der}}</h3>
+    <h3>Calculado por punto medio: {{Med}}</h3>
 </div>
 {%endblock%}

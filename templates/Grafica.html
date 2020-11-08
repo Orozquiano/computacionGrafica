@@ -1,0 +1,81 @@
+{%extends "layout.html"%}
+{%block content%}
+<div class="Grafica">
+  <meta charset="utf-8">
+  <script src="https://unpkg.com/mathjs@7.5.1/dist/math.min.js"></script>
+
+  <script src="https://cdn.plot.ly/plotly-1.35.2.min.js"></script>
+
+  <style>
+    :root{
+      --color-M1:#66097D;
+      --color-M2:#32043D;
+      --color-M3:#9A0DBD;
+      --color-M4:#A40EC9;
+      --color-M5:#860CA3;
+      --color-Oscuro1: #000;
+      --color-claro0: #FFF;
+    }
+    form{
+      display: flex;
+      flex-direction: column;
+    }
+    #draw{
+      margin-top: 5px;
+      padding: 10px;
+      border: 1px solid black;
+      border-radius: 15px;
+      background-color: var(--color-M3);
+      color: var(--color-M1);
+    }
+    #draw:hover{
+      background-color: var(--color-M1);
+      color: var(--color-M3);
+    }
+  </style>
+  <form id="form">
+    <label for="eq">Digite la ecuacion:</label>
+    <input type="text" id="eq" value="4 * sin(x) + 5 * cos(x/2)" />
+    <input id="draw" type="submit" value="Draw" />
+  </form>
+
+  <div id="plot"></div>
+</div>
+</div>
+<!-- Grafica -->
+<script>
+function draw() {
+  try {
+    // compile the expression once
+    const expression = document.getElementById('eq').value.replaceAll("**","^").replaceAll("ln", "log")
+    const expr = math.compile(expression)
+
+    // evaluate the expression repeatedly for different values of x
+    const xValues = math.range(-10, 10, 0.5).toArray()
+    const yValues = xValues.map(function (x) {
+      return expr.evaluate({ x: x })
+    })
+
+    // render the plot using plotly
+    const trace1 = {
+      x: xValues,
+      y: yValues,
+      type: 'scatter'
+    }
+    const data = [trace1]
+    Plotly.newPlot('plot', data)
+  }
+  catch (err) {
+    console.error(err)
+    alert(err)
+  }
+}
+
+document.getElementById('form').onsubmit = function (event) {
+  event.preventDefault()
+  draw()
+}
+
+draw()
+</script>
+{%endblock%}
