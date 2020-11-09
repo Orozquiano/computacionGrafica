@@ -30,7 +30,9 @@ def newton_raphson(x,E,I):
     I+=1
     MT=float(Derivada(x))#penidente de la recta tangente de la funcion 
     Xr=x-(f(x)/MT) #Intercepto en el eje X
-    V=[Xr,I]
+    global Error
+    Error = float(f(Xr))
+    V=[Xr,I,Error]
     if(I>50):
         return ["NO ENCONTRADO",I]
     else:
