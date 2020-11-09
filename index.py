@@ -10,7 +10,7 @@ from MetodoSimpson1_3 import Menu as IS3
 from MetodoSimpson3_8 import Menu as IS8
 from MonteCarlo import CALCULAR as IMonteC
 from math import *
-import sympy as sp 
+import sympy as sp
 import matplotlib as mat
 # Metodo de Bisección
 # Cálculo de primer y segunda derivada
@@ -19,70 +19,71 @@ import matplotlib as mat
 # Newton Raphson
 # Secante
 
-app=Flask(__name__)
+app = Flask(__name__)
+
+
 @app.route('/Grafica.html')
 def Grafica():
     return render_template('Grafica.html')
+
+
 @app.route('/')
 def home():
     return render_template('Home.html')
 
+
 @app.route('/About')
-def About(): 
+def About():
     return render_template('About.html')
+
 
 @app.route('/Biseccion')
 def Biseccion():
     return render_template('Biseccion.html')
 @app.route('/calcularBiseccion', methods=['POST'])
 def CBisecccion():
-    if request.method=='POST':
-        x,y=sp.symbols('x y')
+    if request.method == 'POST':
+        x, y = sp.symbols('x y')
         str_ecuacion = request.form['Ecuacion']
-        funcion= sp.sympify(str_ecuacion)
+        funcion = sp.sympify(str_ecuacion)
 
-        def f(x): 
-            b= funcion.free_symbols
-            var=b.pop()
-            valor = funcion.evalf(subs={var:x})
-
+        def f(x):
+            b = funcion.free_symbols
+            var = b.pop()
+            valor = funcion.evalf(subs={var: x})
             return valor
 
-
-        def validar(P,T):
-            if(f(P)>0):
-                if(f(P)<=T):
+        def validar(P, T):
+            if(f(P) > 0):
+                if(f(P) <= T):
                     return True
             else:
-                if((-1*f(P))<=T):
+                if((-1*f(P)) <= T):
                     return True
-                else: 
-                    return False    
-                
+                else:
+                    return False
 
-        def biseccion(a,b,T,I): 
-            I+=1
-            p=(a+b)/2 #forma de calcular la regla falsa <----
-            fp=f(p)
-            fa=f(a)
-            fb=f(b)
+        def biseccion(a, b, T, I):
+            I += 1
+            p = (a+b)/2  # forma de calcular la regla falsa <----
+            fp = f(p)
+            fa = f(a)
+            fb = f(b)
 
-            if(fa*fb<=0):
-                if(validar(p,T)==True):
-                    
-                    print('{:^10}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}'.format(I, float(a), float(b),float(p),float(fb),float(fa),float(fp),float(fa*fp)))
+            if(fa*fb <= 0):
+                global Error
+                Error=float(fa*fp)
+                if(validar(p, T) == True):
+                    print('{:^10}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}'.format(
+                        I, float(a), float(b), float(p), float(fb), float(fa), float(fp), float(fa*fp)))
                     return p
                 else:
                     if((fa*fp)<=0):
-                        
                         print('{:^10}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}'.format(I, float(a), float(b),float(p),float(fb),float(fa),float(fp),float(fa*fp)))
                         return biseccion(a,p,T,I)
                     else:
-                        
                         print('{:^10}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}'.format(I, float(a), float(b),float(p),float(fb),float(fa),float(fp),float(fa*fp)))
                         return biseccion(p,b,T,I)
-            
-
             else:
                 print("los limites estan mal")
 
@@ -96,7 +97,7 @@ def CBisecccion():
         print('{:^10}{:^10}{:^10}{:^10}{:^10}{:^10}{:^10}{:^10}'.format("I","Xi","Xu","Xr","f(Xu)","f(Xi)","f(Xr)","f(Xi)*f(Xr)"))
         resultado=str(biseccion(a,b,tol,iteracion))
 
-        return render_template('Biseccion.html',resultado=resultado)
+        return render_template('Biseccion.html',resultado=resultado, error=Error)
    
 @app.route('/Derivada')
 def Derivada():    
@@ -119,30 +120,22 @@ def CDerivada():
 
             return valor
 
-
         def ecuacion(x):
             print("Entre a ecuacion")
             h=0.000001 
-
             uno=float((f(x+h)-f(x))/h)
             dos=float((f(x+h)-2*f(x)+f(x-h))/h**2)
-            
             valor1=uno
             valor2=dos
             print("valor primera derivada",uno)
             print("valor segunda derivada",dos)
             return valor1,valor2
+
         def Menu():
-
-            
             opcion=X
-
             return ecuacion(opcion)
 
-
         Menu()
-
-       
         return render_template('Derivada.html',D1=Menu()[0],D2=Menu()[1],d1=Deriavada1,d2=Deriavada2)
 
 @app.route('/RPolinomio')
@@ -189,7 +182,7 @@ def NewtonRaphson():
         Valor=request.form['ValorX']
         Error=request.form['Error']
         R=NR(Ecuacion,Valor,Error)
-    return render_template('Raphson.html',Ecuacion=Ecuacion,Valor=Valor,Error=Error,X=R[0],I=R[1])
+    return render_template('Raphson.html',Ecuacion=Ecuacion,Valor=Valor,Error=Error,X=R[0],I=R[1], eror=R[2])
 
 @app.route('/ReglaFalsa')
 def ReglaFalsa():
@@ -202,7 +195,7 @@ def CReglaFalsa():
         LS=request.form['Limite superior']
         Error=request.form['Tolerancia']
         Resultado=RF(Ecuacion,LI,LS,Error)
-    return render_template('ReglaFalsa.html',Ecuacion=Ecuacion,LI=LI,LS=LS,Error=Error,Resultado=Resultado)
+    return render_template('ReglaFalsa.html',Ecuacion=Ecuacion,LI=LI,LS=LS,Error=Error,Resultado=Resultado[0],eror=Resultado[1])
 
 @app.route('/Secante')
 def Secante():
@@ -215,7 +208,7 @@ def CSecante():
         LS=request.form['Limite superior']
         Error=request.form['Tolerancia']
         Resultado=Sec(Ecuacion,LI,LS,Error)
-    return render_template('Secante.html',Ecuacion=Ecuacion,LI=LI,LS=LS,Error=Error,Resultado=Resultado[0], I=Resultado[1])
+    return render_template('Secante.html',Ecuacion=Ecuacion,LI=LI,LS=LS,Error=Error,Resultado=Resultado[0], I=Resultado[1],eror=Resultado[2])
 
 @app.route('/IntegracionRectangulos')
 def IntegracionRectangulos():

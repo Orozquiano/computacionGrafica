@@ -31,14 +31,15 @@ def Regla_Falsa(a,b,T,I):
     fp=f(p)
     fa=f(a)
     fb=f(b)
+    global Error
+    Error=float(fa*fp)
     if(I>=50):
-        return "NO ENCONTRADO"
+        return ["NO ENCONTRADO",0.00]
     else:
         if(fa*fb<=0):
-            
             if(validar(p,T)==True):
                 print('{:^10}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}'.format(I, float(a), float(b),float(p),float(fb),float(fa),float(fp),float(fa*fp)))
-                return p
+                return [p,Error]
             else:
                 if((fa*fp)<=0):
                     print('{:^10}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}'.format(I, float(a), float(b),float(p),float(fb),float(fa),float(fp),float(fa*fp)))
@@ -47,7 +48,7 @@ def Regla_Falsa(a,b,T,I):
                     print('{:^10}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}'.format(I, float(a), float(b),float(p),float(fb),float(fa),float(fp),float(fa*fp)))
                     return Regla_Falsa(p,b,T,I)
         else:
-            return "los limites estan mal"
+            return ["los limites estan mal",0.0]
 
 def Menu(Ecuacion, Liminf,Limsup,Error):
     global funcion

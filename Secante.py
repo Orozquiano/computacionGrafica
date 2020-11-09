@@ -15,15 +15,16 @@ def f(x):
 def Secante(a,b,E,I):
     I+=1
     if(f(b)-f(a)==0):
-        return ["Los valores estan mal",I]
+        return ["Los valores estan mal",I,0.00]
     Xr=(a*f(b)-b*f(a))/(f(b)-f(a)) #Intercepto en el eje X
-    V=[Xr,I] 
+    Error=float(f(Xr))
+    V=[Xr,I,Error] 
     if I==50:
-        return ["NO ENCONTRADO",I]
+        return ["NO ENCONTRADO",I,0.00]
     else:
         if(f(Xr)>=0):
             if(f(Xr)<=E):
-                print('{:^10}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}'.format(I, float(a), float(b),float(f(a)),float(f(b)),float(Xr),float(f(Xr))))        
+                print('{:^10}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}'.format(I, float(a), float(b),float(f(a)),float(f(b)),float(Xr),float(f(Xr))))
                 return V
             else:
                 print('{:^10}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}'.format(I, float(a), float(b),float(f(a)),float(f(b)),float(Xr),float(f(Xr))))
@@ -34,7 +35,7 @@ def Secante(a,b,E,I):
                 return V
             else:
                 print('{:^10}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}{:^10.6f}'.format(I, float(a), float(b),float(f(a)),float(f(b)),float(Xr),float(f(Xr))))
-                return Secante(a,Xr,E,I) 
+                return Secante(a,Xr,E,I)
     
 
 def Menu(Ecuacion,Xi,Xf,Error):
