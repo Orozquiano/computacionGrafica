@@ -275,6 +275,16 @@ def CMonteCarlo():
         cota=request.form['Cota']
     resultado=IMonteC(Ecu,IA,IB,Iter,cota)
     return render_template('MonteCarlo.html',Ecuacion=Ecu,IA=IA,IB=IB,Iteraciones=Iter,CotaS=cota,Area=resultado)
+@app.route('/Matriz')
+def Matriz():
+    return render_template('Matriz.html')
+@app.route('/CMatriz',methods = ['POST'])
+def CMatriz():
+    if request.method == 'POST':
+        return render_template('Matriz.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
