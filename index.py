@@ -9,6 +9,7 @@ from Integracion_Trapezio import Menu as IT
 from MetodoSimpson1_3 import Menu as IS3
 from MetodoSimpson3_8 import Menu as IS8
 from MonteCarlo import CALCULAR as IMonteC
+from Matriz import menu as matrix
 from math import *
 import sympy as sp
 import matplotlib as mat
@@ -277,11 +278,16 @@ def CMonteCarlo():
     return render_template('MonteCarlo.html',Ecuacion=Ecu,IA=IA,IB=IB,Iteraciones=Iter,CotaS=cota,Area=resultado)
 @app.route('/Matriz')
 def Matriz():
-    return render_template('Matriz.html')
+    return render_template('Matriz.html', Result="not operated")
 @app.route('/CMatriz',methods = ['POST'])
 def CMatriz():
     if request.method == 'POST':
-        return render_template('Matriz.html')
+        MA=request.form['vectorA']
+        MB=request.form['vectorB']
+        op=int(request.form['operacion'])
+        Resultado = matrix(MA,MB,op)
+
+        return render_template('Matriz.html',Result=Resultado[0], MA=Resultado[1], MB=Resultado[2])
 
 
 if __name__ == '__main__':

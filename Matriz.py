@@ -50,7 +50,10 @@ def det(Matriz):
     return round(np.linalg.det(Matriz))
 
 def inversa(Matriz):
-    return linalg.inv(Matriz)
+    if(det(Matriz)!=0):
+        return linalg.inv(Matriz)
+    else:
+        return "La matriz no es invertible"
 
 def transpuesta(Matriz):
     MatrizR=np.zeros((Matriz.shape[0],Matriz.shape[1]), dtype = float)
@@ -59,31 +62,63 @@ def transpuesta(Matriz):
             MatrizR[j][i]=Matriz[i][j]
     return MatrizR
 
-def ecuaciones(Matriz, Resultados):
+def ecuaciones(Matriz, Results):
+    Results=Results.replace("([","")
+    Results=Results.replace("])","")
+    Resultados=Results.split(",")
     R = np.array(Resultados, dtype = float)
-    return np.linalg.solve(Matriz,R)
+    if (det(Matriz)!=0):
+        return np.linalg.solve(Matriz,R)
+    else:
+        return "No se puede resolver el sistema"
+
+def obtenerV(v):
+    resultado = []
+    vector=v.replace("([","")
+    vector=vector.replace("])","")
+    if(len(vector.split('],['))>1):
+        filas = vector.split('],[')
+        for i in range(len(filas)):
+            columnas=filas[i].split(",")
+            arraycolumnas=[]
+            for j in range(len(columnas)):
+                arraycolumnas.append(float(columnas[j]))
+            resultado.append(arraycolumnas)
+    else:
+        valores=vector.split(',')
+        resultado.append(valores)
+
+    # resultado = np.array(resultado)
+    return resultado
+                    
+
 
 def menu(A,B,operacion):
     global matrizA, matrizB
-    matrizA = np.array(A, dtype = float)
-    matrizB = np.array(B, dtype = float)
+    Aa=obtenerV(A)
+    if(operacion!=8):
+        Bb=obtenerV(B)
+        matrizB = np.array(Bb, dtype = float)
+    else:
+        matrizB=B
+    matrizA = np.array(Aa, dtype = float)
 
     if(operacion == 1): #SUMA = 1
-        return suma()
+        return [suma(),matrizA,matrizB]
     elif(operacion == 2): #RESTA = 2
-        return resta()
+        return [resta(),matrizA,matrizB]
     elif(operacion == 3): #MULTIPLICACION = 3
-        return multiplicacion()
+        return [multiplicacion(),matrizA,matrizB]
     elif(operacion == 4): #DIVISION = 4
-        return division()
+        return [division(),matrizA,matrizB]
     elif(operacion == 5): #DETERMINANTE = 5
-        return det(matrizA)
+        return [det(matrizA),matrizA,matrizB]
     elif(operacion == 6): #INVERSA = 6
-        return inversa(matrizA)
+        return [inversa(matrizA),matrizA,matrizB]
     elif(operacion == 7): #TRANSPUESTA = 7
-        return transpuesta(matrizA)
+        return [transpuesta(matrizA),matrizA,matrizB]
     elif(operacion == 8): #SISTEMAS DE ECUACIONES = 8
-        return ecuaciones(matrizA,matrizB)
+        return [ecuaciones(matrizA,matrizB),matrizA,matrizB]
 
-print(menu(([5,3,4],[7,8,9],[2.5,7.2,3.9]),([2,-1,3]),8))
+# print(menu(([5,3,4],[7,8,9],[2.5,7.2,3.9]),([2,-1,3]),8))
     
