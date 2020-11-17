@@ -28,21 +28,19 @@ def ajustecurva(x,y,grade):
                 matriz[0,0]=len(x)
             else:
                 for v in range(len(x)):
-                    matriz[i,j]+=x[v]**(i+j)
+                    matriz[i,j]+=float(x[v])**(i+j)
     matriz2=np.zeros((1,grade+1), dtype=float)
     for i in range(grade+1):
         for v in range(len(y)):
-            matriz2[0,i]+=y[v]*(x[v]**i)
-    Resultado.append(division(matriz2,matriz))
-    print(Resultado)
+            matriz2[0,i]+=float(y[v])*(float(x[v])**i)
+    return division(matriz2,matriz)
 
 def menu(datosX, datosY, grado):
     global Resultado
-    Resultado=[]
     datosX=np.array(datosX)
     datosY=np.array(datosY)
-    ajustecurva(datosX,datosY, grado)
-
+    Resultado = ajustecurva(datosX,datosY, int(grado))
+    return Resultado
 # x=[1.6,2,2.4,2.9,3.4,3.7,4.2]
 # y=[5,5.8,6.7,7.5,8.3,9.3,10.7]
 # menu(x,y,6)
