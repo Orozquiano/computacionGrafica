@@ -42,6 +42,8 @@ def division():
             for j in range(matrizC.shape[1]):
                 for k in range(matrizC.shape[0]):
                     matrizR[i][j] += matrizA[i][k] * matrizC [k][j]
+    else:
+        return "imposible dividir"
     return matrizR
 
 def det(Matriz):
