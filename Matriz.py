@@ -27,12 +27,10 @@ def resta():
 
 def multiplicacion():
     matrizR = np.zeros((matrizA.shape[0],matrizB.shape[1]), dtype = float)
-
     if(matrizA.shape[1] == matrizB.shape[0]):
-        for i in range(matrizA.shape[0]):
-            for j in range(matrizB.shape[1]):
-                for k in range(matrizB.shape[0]):
-                    matrizR[i][j] += matrizA[i][k] * matrizB [k][j]
+        matrizR = matrizA*matrizB
+    else: 
+        return "no es posible multiplicarlos"
     return matrizR
 
 def division():
