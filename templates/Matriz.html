@@ -1,0 +1,358 @@
+{%extends "layout.html"%}
+{%block content%}
+<style>
+    :root {
+        --color-Blue1: #153240;
+        --color-Blue2: #2E6E8D;
+        --color-Blue3: #47AAD9;
+        --color-claro1: #FFE6B3;
+        --color-claro2: #FFF3D9;
+        --color-Oscuro1: #000;
+        --color-claro0: #FFF;
+    }
+
+    .contenido {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contenido form {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contenido form label {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .contenido>h3 {
+        margin-top: 10px;
+    }
+
+    .contenido>textarea {
+        width: 50%;
+        font-size: 20px;
+    }
+
+    .contenido form .botones {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .contenido form button {
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 15px;
+        background-color: var(--color-Blue3);
+        color: var(--color-Blue1);
+    }
+
+    .contenido form button:hover {
+        background-color: var(--color-Blue1);
+        color: var(--color-Blue3);
+    }
+
+    .contenido form #matrices {
+        width: 100vw;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    .contenido form #matrices>div {
+        border: 1px solid green;
+        padding: 5px;
+        width: auto;
+    }
+
+    .contenido form #matrices>div .col {
+        /* margin-left: 3px; */
+        width: 50px;
+    }
+    .contenido form .rcinputs{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+</style>
+<div class="contenido">
+    <h1>Operaciones con Matrices</h1>
+    <form action="/CMatriz" method="POST">
+        <div class="rcinputs">
+            <div>
+                <label>
+                    Filas de A
+                    <input type="number" value="2" id="FilA">
+                </label>
+                <label>
+                    Columnas de A
+                    <input type="number" value="2" id="ColA">
+                </label>
+            </div>
+            <div>
+                <label>
+                    Filas de B
+                    <input type="number" value="2" id="FilB">
+                </label>
+                <label>
+                    Columnas de B
+                    <input type="number" value="2" id="ColB">
+                </label>
+            </div>
+        </div>
+        <div id="matrices">
+            <div id="matrizA">
+                <h3>Matriz A</h3>
+            </div>
+            <div class="operacion">
+                <select name="operacion" id="operacion">
+                    <option value="1">Suma</option>
+                    <option value="2">Resta</option>
+                    <option value="3">Multiplicación</option>
+                    <option value="4">División</option>
+                    <option value="5">Determinante</option>
+                    <option value="6">Inversa</option>
+                    <option value="7">Traspuesta</option>
+                    <option value="8">Sistema de Ecuaciones</option>
+                </select>
+            </div>
+            <div id="matrizB">
+                <h3>Matriz B</h3>
+            </div>
+        </div>
+        <div class="vectores">
+            <input id="vectorA" name="vectorA" readonly>
+            <input id="vectorB" name="vectorB" readonly>
+        </div>
+        <div class="botones">
+            <button type="submit">Resolver</button>
+            <button type="reset">
+                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                    <path fill-rule="evenodd"
+                        d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                </svg>
+            </button>
+        </div>
+    </form>
+    <h3>Resultado</h3>
+    <textarea type="text" id="matrizsa">{{MA}}</textarea>
+    <textarea type="text" id="matrizsb">{{MB}}</textarea>
+    <textarea>{{Result}}</textarea>
+</div>
+<script>
+    const filaA = document.getElementById("FilA");
+    const columnaA = document.getElementById("ColA");
+    let filasA = filaA.value;
+    let columnasA = columnaA.value;
+    const filaB = document.getElementById("FilB");
+    const columnaB = document.getElementById("ColB");
+    let filasB = filaB.value;
+    let columnasB = columnaB.value;
+    ecuaciones = false;
+    actualizarhtml();
+    document.getElementById("operacion").addEventListener("change", () => {
+        if (document.getElementById("operacion").value == 8) {
+            this.ecuaciones = true;
+            actualizarhtml();
+        } else {
+            this.ecuaciones = false;
+            actualizarhtml();
+        }
+    });
+    filaA.addEventListener("change", () => {
+        // Detecta un cambio en las filas
+        filasA = parseInt(filaA.value);
+        if (filasA > 7) {
+            alert("el máximo de filas es 7");
+            filaA.value = 7;
+        } else {
+            if (filasA < 1) {
+                alert("el mínimo de filas es 1");
+                filaA.value = 1;
+            } else {
+                actualizarhtml();
+            }
+        }
+    });
+    columnaA.addEventListener("change", () => {
+        // Detecta un cambio en las columnas
+        columnasA = parseInt(columnaA.value);
+        if (columnasA > 7) {
+            alert("el máximo de columnas es 7");
+            columnaA.value = 7;
+        } else {
+            if (columnasA < 1) {
+                alert("el mínimo de columnas es 2");
+                columnaA.value = 1;
+            } else {
+                actualizarhtml();
+            }
+        }
+    });
+    filaB.addEventListener("change", () => {
+        // Detecta un cambio en las filas
+        filasB = parseInt(filaB.value);
+        if (filasB > 7) {
+            alert("el máximo de filas es 7");
+            filaB.value = 7;
+        } else {
+            if (filasB < 1) {
+                alert("el mínimo de filas es 1");
+                filaB.value = 1;
+            } else {
+                actualizarhtml();
+            }
+        }
+    });
+    columnaB.addEventListener("change", () => {
+        // Detecta un cambio en las columnas
+        columnasB = parseInt(columnaB.value);
+        if (columnasB > 7) {
+            alert("el máximo de columnas es 7");
+            columnaB.value = 7;
+        } else {
+            if (columnasB < 1) {
+                alert("el mínimo de columnas es 2");
+                columnaB.value = 1;
+            } else {
+                actualizarhtml();
+            }
+        }
+    });
+    function updateinputstate() {
+        for (let fil = 1; fil <= filasA; fil++) {
+            for (let cols = 1; cols <= columnasA; cols++) {
+                document.getElementById(`Af${fil}c${cols}`).addEventListener("change", () => {
+                    obtenervectores();
+                });
+            }
+            if(this.ecuaciones==true){
+                document.getElementById(`E${fil}`).addEventListener("change", () => {
+                    obtenervectores();
+                });
+            }
+        }
+        if (this.ecuaciones == false) {
+            for (let fil = 1; fil <= filasB; fil++) {
+                for (let cols = 1; cols <= columnasB; cols++) {
+                    document.getElementById(`Bf${fil}c${cols}`).addEventListener("change", () => {
+                        obtenervectores();
+                    });
+                }
+            }
+        }
+        obtenervectores();
+    }
+
+    function actualizarhtml() {
+        document.getElementById("matrizA").innerHTML = "<h3>Matriz A</h3>";
+        document.getElementById("matrizB").innerHTML = "<h3>Matriz B</h3>";
+        let ingresarA = "<div class='row'>";
+        let ingresarB = "<div class='row'>";
+        ingresarA += `<div class="col"></div>`;
+        ingresarB += `<div class="col"></div>`;
+        for (let i = 1; i <= columnasA; i++) {
+            ingresarA += `<div class="col">C${i}</div>`;
+        }
+        for (let i = 1; i <= columnasB; i++) {
+            ingresarB += `<div class="col">C${i}</div>`;
+        }
+        if (this.ecuaciones == true) {
+            ingresarA += `<div class="col">Igual</div>`;
+            document.getElementById("matrizB").style.display='none';
+        }else{
+            document.getElementById("matrizB").style.display='block';
+        }
+        ingresarA += "</div>"
+        ingresarB += "</div>"
+        for (let i = 1; i <= filasA; i++) {
+            // ingresa una fila
+            ingresarA += `<div class="row"><p class="col">F${i}</p>`;
+            for (let j = 1; j <= columnasA; j++) {
+                //ingresa cada columna a la fila
+                ingresarA += `<input class="col" id="Af${i}c${j}" value="0">`;
+            }
+            if (this.ecuaciones == true) {
+                //ingresa cada columna de igualdad a la fila de ecuaciones
+                ingresarA += `<input class="col" id="E${i}" value="0">`;
+            }
+            ingresarA += "</div>"
+        }
+        if(this.ecuaciones==false){
+            for (let i = 1; i <= filasB; i++) {
+                // ingresa una fila
+                ingresarB += `<div class="row"><p class="col">F${i}</p>`;
+                for (let j = 1; j <= columnasB; j++) {
+                    //ingresa cada columna a la fila
+                    ingresarB += `<input class="col" id="Bf${i}c${j}" value="0">`;
+                }
+                ingresarB += "</div>"
+            }
+        }
+        document.getElementById("matrizA").innerHTML += ingresarA;
+        document.getElementById("matrizB").innerHTML += ingresarB;
+        updateinputstate();
+        obtenervectores();
+    }
+    function obtenervectores() {
+        let vectorA = "(";
+        for (let i = 1; i <= filasA; i++) {
+            vectorA += "[";
+            for (let j = 1; j <= columnasA; j++) {
+                vectorA += document.getElementById(`Af${i}c${j}`).value;
+                if (j < columnasA) {
+                    vectorA += ",";
+                } else {
+                    vectorA += "]";
+                }
+            }
+            if (i < filasA) {
+                vectorA += ",";
+            } else {
+                vectorA += ")";
+            }
+        }
+        let vectorB = "(";
+        if (this.ecuaciones == true) {
+            vectorB += "[";
+        }
+        for (let i = 1; i <= filasB; i++) {
+            if (this.ecuaciones == false) {
+                vectorB += "[";
+            }
+            if (this.ecuaciones == false) {
+                for (let j = 1; j <= columnasB; j++) {
+                    vectorB += document.getElementById(`Bf${i}c${j}`).value;
+                    if (j < columnasB) {
+                        vectorB += ",";
+                    } else {
+                        vectorB += "]";
+                    }
+                }
+                if (i < filasB) {
+                    vectorB += ",";
+                } else {
+                    vectorB += ")";
+                }
+            } else {
+                vectorB += document.getElementById(`E${i}`).value;
+                if (i < filasB) {
+                    vectorB += ",";
+                } else {
+                    vectorB += "])";
+                }
+            }
+        }
+        document.getElementById("vectorA").value = vectorA;
+        document.getElementById("vectorB").value = vectorB;
+    }
+</script>
+{%endblock%}
