@@ -29,7 +29,7 @@
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <img src="{{url_for('static', filename='Images/Carlos.jpg')}}" alt="Avatar"
+              <img src="{{url_for('static', filename='Images/Naruto.gif')}}" alt="Avatar"
                 style="width:300px;height:300px;">
             </div>
             <div class="flip-card-back">
@@ -74,7 +74,7 @@
         <div class="flip-card">
           <div class="flip-card-inner">
             <div class="flip-card-front">
-              <img src="{{url_for('static', filename='Images/Cargando.gif')}}" alt="Avatar"
+              <img src="{{url_for('static', filename='Images/anonymous.gif')}}" alt="Avatar"
                 style="width:300px;height:300px;">
             </div>
             <div class="flip-card-back">
@@ -88,7 +88,7 @@
     </div>
   </div>
 </section>
-<section>
+<section class="seccionsita">
   <div class="carlitos">
     <p clas="Calculadoras">CALCULADORAS</p>
     <div class="row">
@@ -182,7 +182,7 @@
       <div class="col-sm-4 my-3">
         <div class="card card-flip h-100">
           <div class="card-front text-white bg-success">
-            <div class="card-body" style="display: flex; justify-content: center; align-items: center; background-color: #0FF00F;">
+            <div class="card-body" style="display: flex; justify-content: center; align-items: center; background-color: #E63946;">
               <i class="fa fa-search fa-5x float-right"></i>
               <h3 class="card-title" style="font-family:fantasy">MATRICES</h3>
             </div>
@@ -190,6 +190,21 @@
           <div class="card-back bg-dark text-white">
             <div class="card-body" style="display: flex; flex-direction:column; flex-wrap: wrap; aling-content: center; aling-items: center; justify-content:center;">
               <a href="{{url_for('Matriz')}}" class="btn btn-outline-secondary">Calculadora</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 my-3">
+        <div class="card card-flip h-100">
+          <div class="card-front text-white bg-success">
+            <div class="card-body" style="display: flex; justify-content: center; align-items: center; background-color: #A8DADC;">
+              <i class="fa fa-search fa-5x float-right"></i>
+              <h3 class="card-title" style="font-family:fantasy">AJUSTE DE CURVAS</h3>
+            </div>
+          </div>
+          <div class="card-back bg-dark text-white">
+            <div class="card-body" style="display: flex; flex-direction:column; flex-wrap: wrap; aling-content: center; aling-items: center; justify-content:center;">
+              <a href="{{url_for('AjusteCurvas')}}" class="btn btn-outline-secondary">Calculadora</a>
             </div>
           </div>
         </div>

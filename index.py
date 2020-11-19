@@ -10,6 +10,7 @@ from MetodoSimpson1_3 import Menu as IS3
 from MetodoSimpson3_8 import Menu as IS8
 from MonteCarlo import CALCULAR as IMonteC
 from Matriz import menu as matrix
+from AjusteCurvas import menu as Ajuste
 from math import *
 import sympy as sp
 import matplotlib as mat
@@ -276,6 +277,7 @@ def CMonteCarlo():
         cota=request.form['Cota']
     resultado=IMonteC(Ecu,IA,IB,Iter,cota)
     return render_template('MonteCarlo.html',Ecuacion=Ecu,IA=IA,IB=IB,Iteraciones=Iter,CotaS=cota,Area=resultado)
+
 @app.route('/Matriz')
 def Matriz():
     return render_template('Matriz.html', Result="not operated")
@@ -286,9 +288,28 @@ def CMatriz():
         MB=request.form['vectorB']
         op=int(request.form['operacion'])
         Resultado = matrix(MA,MB,op)
+        if(op==8):
+            Resultado[0]="valor de las variables a0, a1, a2, ..., an \n"+str(Resultado[0])
 
         return render_template('Matriz.html',Result=Resultado[0], MA=Resultado[1], MB=Resultado[2])
 
+@app.route('/AjusteCurvas')
+def AjusteCurvas():
+    return render_template('AjusteCurvas.html')
+@app.route('/CAjusteCurvas', methods= ['POST'])
+def CAjusteCurvas():
+    if request.method == 'POST':
+        X=request.form['datosX']
+        Y=request.form['datosY']
+        G=request.form['grado']
+        X=X.replace("[","")
+        X=X.replace("]","")
+        X=X.split(",")
+        Y=Y.replace("[","")
+        Y=Y.replace("]","")
+        Y=Y.split(",")
+        resultado=Ajuste(X,Y,G)
+        return render_template('AjusteCurvas.html', Result=resultado)
 
 if __name__ == '__main__':
     app.run(debug=True)
